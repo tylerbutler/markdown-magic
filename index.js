@@ -14,8 +14,12 @@ const processFile = require('./lib/processFile')
  * @param  {Function} [callback] - callback function with updated contents
  */
 module.exports = async function markdownMagic(filePaths, config, callback) {
-  const files = globby.sync(filePaths)
   const configuration = config || {}
+  let globbyOptions = {}
+  if(config && config.globbyOptions) {
+    globbyOptions = Object.assign({}, config.globbyOptions);
+  }
+  const files = globby.sync(filePaths, globbyOptions);
   if (!callback && typeof configuration === 'function') {
     callback = configuration // eslint-disable-line
   } else if (typeof config === 'object' && config.callback) {
