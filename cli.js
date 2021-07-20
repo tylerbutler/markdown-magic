@@ -12,6 +12,8 @@ var filePaths = defaultFileName
 var callbackFunction = defaultCallback // eslint-disable-line
 var ignorePath // eslint-disable-line
 
+console.log(JSON.stringify(process.argv))
+
 // start commander.js
 program
   .version(pkg.version)
@@ -21,7 +23,10 @@ program
   // .option('-cb, --callback [path]', 'Define path', parsePaths, defaultFileName)
   .parse(process.argv)
 
+console.log(`program.config: ${program.config}`)
+console.log(`program.ignore: ${program.ignore}`)
 const configFile = getConfigFilepath()
+console.log(`configFile: ${configFile}`)
 const foundConfig = (configFile) ? loadConfig(configFile) : false
 
 if (foundConfig && foundConfig.callback) {
@@ -68,6 +73,7 @@ if (ignorePath) {
 // console.log('configuration', configuration)
 // console.log('callbackFunction', callbackFunction)
 console.log('Starting markdown-magic', filePaths)
+console.log(`config`, configuration)
 markdownMagic(filePaths, configuration, callbackFunction)
 
 function defaultCallback(err, msg) {
