@@ -20,7 +20,6 @@ function getModuleRequirePath(moduleName) {
 
 function getAttemptModuleRequireFn(onFail) {
   return function attemptModuleRequire(moduleName) {
-    console.log(`Loading config from ${moduleName}`)
     const requirePath = getModuleRequirePath(moduleName)
     try {
       return requireDefaultFromModule(requirePath)
@@ -49,7 +48,6 @@ function requireDefaultFromModule(modulePath) {
 }
 
 function loadConfig(configPath) {
-  console.log(`loadConfig(config): ${configPath}`)
   // potentially load other types of config files
   return loadJSConfig(configPath)
 }
